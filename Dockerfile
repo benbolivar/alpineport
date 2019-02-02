@@ -23,7 +23,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     apk upgrade apk-tools && \
     apk add --update ca-certificates bash openssh openssl shadow  \
     dialog sudo wget unzip mc curl vim supervisor \
-    x11vnc xvfb subversion fluxbox rxvt-unicode xfonts-terminus dbus-x11 software-properties-common socat libxext libxrender libxtst && \
+    x11vnc xvfb subversion fluxbox rxvt-unicode xfonts-terminus dbus-x11 socat libxext libxrender libxtst && \
     curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
