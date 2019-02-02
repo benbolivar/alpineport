@@ -23,7 +23,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     apk upgrade apk-tools && \
     apk add --update ca-certificates bash openssh openssl shadow  \
     dialog sudo wget unzip mc curl vim supervisor \
-    x11vnc xvfb subversion fluxbox rxvt-unicode xfonts-terminus dbus-x11 socat libxext libxrender libxtst && \
+    x11vnc xvfb subversion fluxbox rxvt-unicode terminus-font dbus-x11 socat libxext libxrender libxtst && \
     curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -43,7 +43,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/pki/tls/certs/novnc.pem -out /etc/pki/tls/certs/novnc.pem -days 3650 \
          -subj "/C=PH/ST=Cebu/L=Cebu/O=NA/OU=NA/CN=codenvy.io" && \
     sudo chmod 444 /etc/pki/tls/certs/novnc.pem && \
-    sudo apt-get install -y libxext-dev libxrender-dev libxtst-dev libgtk2.0-0 libcanberra-gtk-module g++ gdb cmake && apt-get -y autoremove && \
+    sudo apt-get install -y libxext-dev libxrender-dev libxtst-dev gtk+3.0 libcanberra-gtk3 g++ gdb cmake && apt-get -y autoremove && \
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     echo "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
