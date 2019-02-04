@@ -55,7 +55,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
-ADD menu /home/user/menu
+ADD --chown=user:user menu /home/user/.menu
+ADD --chown=user:user init /home/user/.init
 
 USER user
 
