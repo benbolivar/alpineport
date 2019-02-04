@@ -24,8 +24,8 @@ ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk upgrade apk-tools && \
-    apk add --update ca-certificates bash openssh openssl shadow  \
-    dialog sudo wget unzip mc curl vim supervisor icu-libs firefox \
+    apk add --update ca-certificates icu-libs bash openssh openssl shadow  \
+    dialog sudo wget unzip mc curl vim supervisor firefox \
     x11vnc xvfb subversion fluxbox rxvt-unicode terminus-font dbus-x11 socat libxext libxrender libxtst && \
     curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
