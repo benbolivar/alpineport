@@ -17,8 +17,10 @@ ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/${USER_NAME}
 
-ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
-ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
+#ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
+ARG ECLIPSE_MIRROR=https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/3
+#ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
+ARG ECLIPSE_TAR=eclipse-committers-neon-3-linux-gtk-x86_64.tar.gz&r=1
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk upgrade apk-tools && \
