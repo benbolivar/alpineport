@@ -18,6 +18,7 @@
 [encoding] {UTF-8}
       [exec] (Terminal) {urxvt -fn "xft:Terminus:size=14"}
       [exec] (File Manager) {urxvt -fn "xft:Terminus:size=14" -e mc}
+      [exec] (Browser) {midori}
       [exec] (Eclipse CDT) {/opt/eclipse/eclipse}
 [submenu] (Editors)
       [exec]   (vim) {urxvt -fn "xft:Terminus:size=14" -e vim}
