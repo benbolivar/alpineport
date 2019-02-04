@@ -1,5 +1,5 @@
-FROM openjdk:8u191-jdk-alpine3.8
-#FROM openjdk:8u191-jre-alpine3.8
+#FROM openjdk:8u191-jdk-alpine3.8
+FROM openjdk:8u191-jre-alpine3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
