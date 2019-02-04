@@ -46,11 +46,12 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+3.0 libcanberra-gtk3 g++ gdb cmake && \
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
-    echo "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\n\
-        export TOMCAT_HOME=/home/user/tomcat8\n\
-        export PATH=$M2_HOME/bin:$PATH\n\
-        if [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\n\
-        sleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc
+    echo "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\n\
+export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\n\
+export TOMCAT_HOME=/home/user/tomcat8\n\
+export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\n\
+if [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi\n\
+sudo date >> /home/user/date.log" | sudo tee -a /home/user/.bashrc
     
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
