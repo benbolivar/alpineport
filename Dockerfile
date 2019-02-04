@@ -22,7 +22,7 @@ ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/ph
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
 #ARG ECLIPSE_TAR=eclipse-committers-neon-3-linux-gtk-x86_64.tar.gz&r=1
       
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk upgrade apk-tools && \
     apk add --update ca-certificates bash openssh openssl shadow  \
     dialog sudo wget unzip mc curl vim supervisor midori \
