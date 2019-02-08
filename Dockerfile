@@ -54,7 +54,22 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         \nexport TOMCAT_HOME=/home/user/tomcat8\
         \nexport PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi\
-        \nsudo date >> /home/user/date.log" | sudo tee -a /home/user/.bashrc
+        \nsudo date >> /home/user/date.log" | sudo tee -a /home/user/.bashrc && \
+    \
+    cd /tmp && \
+    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    curl -Lso /tmp/glibc-2.28-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk && \
+    apk add /tmp/glibc-2.28-r0.apk && \
+    \
+    curl -Lso /tmp/libz.tar.xz https://www.archlinux.org/packages/core/x86_64/zlib/download && \
+    mkdir -p /tmp/libz && \
+    tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
+    cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
+    \
+    rm /tmp/glibc-2.28-r0.apk && \
+    rm /tmp/libz.tar.xz && \
+    rm -rf /tmp/libz
+    
 
 # before printf
 #    sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
