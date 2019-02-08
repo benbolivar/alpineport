@@ -3,8 +3,8 @@ FROM openjdk:8u191-jdk-alpine3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
-ENV LANG=C.UTF-8 \
-    DOCKER_VERSION=1.6.0 \
+#ENV LANG=C.UTF-8 \
+ENV DOCKER_VERSION=1.6.0 \
     DOCKER_BUCKET=get.docker.com \
     CHE_IN_CONTAINER=true \
     MAVEN_VERSION=3.3.9 \
@@ -24,7 +24,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     apk upgrade apk-tools && \
     apk add --update ca-certificates bash openssh openssl shadow  \
     sudo wget unzip mc curl vim supervisor midori \
-    x11vnc xvfb subversion fluxbox xterm terminus-font dbus-x11 socat libxext libxrender libxtst ttf-ubuntu-font-family && \
+    x11vnc xvfb subversion fluxbox xterm terminus-font dbus-x11 libxext libxrender libxtst ttf-ubuntu-font-family && \
     \
     curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
