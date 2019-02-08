@@ -47,6 +47,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
          -subj "/C=PH/ST=Cebu/L=Cebu/O=NA/OU=NA/CN=codenvy.io" && \
     sudo chmod 444 /etc/pki/tls/certs/novnc.pem && \
     sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+3.0 libcanberra-gtk3 g++ gdb cmake && \
+    sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
+    sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
         \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
