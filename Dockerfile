@@ -48,7 +48,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
          -subj "/C=PH/ST=Cebu/L=Cebu/O=NA/OU=NA/CN=codenvy.io" && \
     sudo chmod 444 /etc/pki/tls/certs/novnc.pem && \
     \
-    sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+2.0 libcanberra-gtk2 g++ gdb cmake && \\\
+    sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+2.0 libcanberra-gtk2 g++ gdb make && \\\
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
