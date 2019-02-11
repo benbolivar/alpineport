@@ -3,9 +3,9 @@ FROM openjdk:8u191-jre-alpine3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
+#    DOCKER_BUCKET=get.docker.com \
+#    CHE_IN_CONTAINER=true \
 ENV DOCKER_VERSION=1.6.0 \
-    DOCKER_BUCKET=get.docker.com \
-    CHE_IN_CONTAINER=true \
     MAVEN_VERSION=3.3.9 \
     TOMCAT_HOME=/home/user/tomcat8
 ENV TERM xterm
@@ -19,12 +19,12 @@ ENV HOME=/home/user
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
+#    curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
+#    chmod +x /usr/bin/docker && \
+#    \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
-    \
-    curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
-    chmod +x /usr/bin/docker && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
