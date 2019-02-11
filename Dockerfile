@@ -86,6 +86,7 @@ ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
 ADD --chown=user:root menu /home/user/.menu
 ADD --chown=user:root init /home/user/.init
+ADD --chown=user:root init /home/user/.config/fontconfig/fonts.conf
 
 USER user
 
