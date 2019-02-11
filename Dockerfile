@@ -24,7 +24,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     apk upgrade apk-tools && \
     apk add --update ca-certificates bash openssh openssl shadow  \
     sudo wget unzip mc curl vim supervisor midori icu-libs \
-    x11vnc xvfb subversion fluxbox xterm terminus-font dbus-x11 libxext libxrender libxtst ttf-ubuntu-font-family && \
+    x11vnc xvfb subversion fluxbox xterm terminus-font dbus-x11 libxext libxrender libxtst font-croscore && \
     \
     curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
