@@ -3,7 +3,6 @@ FROM openjdk:8u191-jre-alpine3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
-#ENV LANG=C.UTF-8 \
 ENV DOCKER_VERSION=1.6.0 \
     DOCKER_BUCKET=get.docker.com \
     CHE_IN_CONTAINER=true \
@@ -21,10 +20,8 @@ ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/ph
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk upgrade apk-tools && \
-    apk add --update ca-certificates bash openssh openssl shadow  \
-    sudo wget unzip mc curl vim supervisor midori icu-libs \
-    x11vnc xvfb subversion fluxbox xterm terminus-font dbus-x11 libxext libxrender libxtst font-croscore && \
+    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
+    supervisor midori icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
     \
     curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
@@ -59,8 +56,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
         \nexport PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\
-        \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi\
-        \nsudo date >> /home/user/date.log" | sudo tee -a /home/user/.bashrc && \
+        \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
+        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
     \
     cd /tmp && \
     curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
@@ -76,11 +73,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     rm /tmp/libz.tar.xz && \
     rm -rf /tmp/libz
     
-
-# before printf
-#    sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
-#    sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
-
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
