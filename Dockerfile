@@ -14,7 +14,7 @@ ENV DISPLAY :20.0
 ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
 ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
-ENV HOME=/home/${USER_NAME}
+ENV HOME=/home/user
 
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
@@ -48,14 +48,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     sudo wget -qO- "http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.24/bin/apache-tomcat-8.0.24.tar.gz" | sudo tar -zx --strip-components=1 -C /home/user/tomcat8 && \
     sudo rm -rf /home/user/tomcat8/webapps/* && \
     \
+    sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+2.0 libcanberra-gtk2 g++ gdb cmake && \
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
-    sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+2.0 libcanberra-gtk2 g++ gdb cmake && \
     \
-    printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
-        \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
+    printf "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
-        \nexport PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\
+        \nexport PATH=$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
         \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
     \
