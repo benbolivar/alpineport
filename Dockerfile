@@ -48,7 +48,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
          -subj "/C=PH/ST=Cebu/L=Cebu/O=NA/OU=NA/CN=codenvy.io" && \
     sudo chmod 444 /etc/pki/tls/certs/novnc.pem && \
     \
-    sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+3.0 libcanberra-gtk3 g++ gdb make && \
+    sudo apk add --update libxext-dev libxrender-dev libxtst-dev gtk+2.0 libcanberra-gtk2 g++ gdb make && \
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
@@ -61,8 +61,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     cd /tmp && \
     curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     curl -Lso /tmp/glibc-2.28-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk && \
-    curl -Lso /tmp/glibc-i18n-2.28-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-i18n-2.28-r0.apk && \
-    apk add /tmp/glibc-2.28-r0.apk /tmp/glibc-i18n-2.28-r0.apk && \
+    apk add /tmp/glibc-2.28-r0.apk && \
     \
     curl -Lso /tmp/libz.tar.xz https://www.archlinux.org/packages/core/x86_64/zlib/download && \
     mkdir -p /tmp/libz && \
@@ -70,7 +69,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
     \
     rm /tmp/glibc-2.28-r0.apk && \
-    rm /tmp/glibc-i18n-2.28-r0.apk && \
     rm /tmp/libz.tar.xz && \
     rm -rf /tmp/libz
 
