@@ -70,7 +70,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
     cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
     \
-    rm /tmp/glibc-2.28-r0.apk && \
+    rm /tmp/glibc-2.29-r0.apk && \
+    rm /tmp/glibc-bin-2.29-r0.apk && \
+    rm /tmp/glibc-i18n-2.29-r0.apk && \
     rm /tmp/libz.tar.xz && \
     rm -rf /tmp/libz
     
