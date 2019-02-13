@@ -1,6 +1,6 @@
 #FROM openjdk:8u191-jdk-alpine3.8
-#FROM openjdk:8u191-jre-alpine3.8
-FROM  frolvlad/alpine-oraclejdk8-temporary:slim
+FROM openjdk:8u191-jre-alpine3.8
+#FROM  frolvlad/alpine-oraclejdk8-temporary:slim
 
 EXPOSE 8080 8000 5900 6080 32745
 
@@ -58,29 +58,27 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         \nexport TOMCAT_HOME=/home/user/tomcat8\
         \nexport PATH=$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
-        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc 
-#&& \
-#    \
-#    cd /tmp && \
-#    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-#    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
-#    apk add /tmp/glibc-2.29-r0.apk && \
-#    \
-#    curl -Lso /tmp/libz.tar.xz https://www.archlinux.org/packages/core/x86_64/zlib/download && \
-#    mkdir -p /tmp/libz && \
-#    tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
-#    cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
-#    \
-#    rm /tmp/glibc-2.29-r0.apk && \
-#    rm /tmp/libz.tar.xz && \
-#    rm -rf /tmp/libz
+        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
+    \
+    cd /tmp && \
+    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
+    apk add /tmp/glibc-2.29-r0.apk && \
+    \
+    curl -Lso /tmp/libz.tar.xz https://www.archlinux.org/packages/core/x86_64/zlib/download && \
+    mkdir -p /tmp/libz && \
+    tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
+    cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
+    \
+    rm /tmp/glibc-2.29-r0.apk && \
+    rm /tmp/libz.tar.xz && \
+    rm -rf /tmp/libz
 
 #    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
 #    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
 #    rm /tmp/glibc-bin-2.29-r0.apk && \
 #    rm /tmp/glibc-i18n-2.29-r0.apk && \
 #    apk add /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
-
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
