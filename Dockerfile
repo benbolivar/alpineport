@@ -21,12 +21,10 @@ ENV SWT_GTK3=0
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
-#    curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
-#    chmod +x /usr/bin/docker && \
-#    \
+#    supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
-    supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
+    supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     apk add --update webkit2gtk gcr libsoup && \
     \
@@ -87,7 +85,7 @@ ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
 ADD --chown=user:root menu /home/user/.menu
 ADD --chown=user:root init /home/user/.init
-ADD --chown=user:root fonts.conf /home/user/.config/fontconfig/fonts.conf
+#ADD --chown=user:root fonts.conf /home/user/.config/fontconfig/fonts.conf
 
 USER user
 
