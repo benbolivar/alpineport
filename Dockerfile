@@ -15,6 +15,7 @@ ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
 ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
+ENV SWT_GTK3=0
 
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
@@ -61,7 +62,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     cd /tmp && \
     curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
-    apk add /tmp/glibc-2.29-r0.apk && \
+    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
+    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
+    apk add /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
     \
     curl -Lso /tmp/libz.tar.xz https://www.archlinux.org/packages/core/x86_64/zlib/download && \
     mkdir -p /tmp/libz && \
@@ -69,6 +72,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
     \
     rm /tmp/glibc-2.29-r0.apk && \
+    rm /tmp/glibc-bin-2.29-r0.apk && \
+    rm /tmp/glibc-i18n-2.29-r0.apk && \
     rm /tmp/libz.tar.xz && \
     rm -rf /tmp/libz
 
