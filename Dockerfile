@@ -1,11 +1,8 @@
-#FROM openjdk:8u191-jdk-alpine3.8
-FROM openjdk:8u191-jre-alpine3.8
-#FROM  frolvlad/alpine-oraclejdk8-temporary:slim
+FROM openjdk:8u191-jdk-alpine3.8
+#FROM openjdk:8u191-jre-alpine3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
-#    DOCKER_BUCKET=get.docker.com \
-#    CHE_IN_CONTAINER=true \
 ENV DOCKER_VERSION=1.6.0 \
     MAVEN_VERSION=3.3.9 \
     TOMCAT_HOME=/home/user/tomcat8
@@ -26,7 +23,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
-    apk add --update webkit2gtk gcr libsoup && \
+    apk add --update webkit2gtk gcr libsoup gdk-pixbuf && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
