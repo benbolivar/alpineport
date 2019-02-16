@@ -57,7 +57,7 @@ RUN apk del libstdc++ && \
     sudo sed "s/@user.home\/eclipse-workspace/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk add firefox-esr greybird-themes-gtk3 webkit2gtk && \
+    apk add firefox-esr greybird-themes-gtk3 font-croscore && \
     \
     printf "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
@@ -84,7 +84,7 @@ ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
 ADD --chown=user:root menu /home/user/.menu
 ADD --chown=user:root init /home/user/.init
-#ADD --chown=user:root fonts.conf /home/user/.config/fontconfig/fonts.conf
+ADD --chown=user:root fonts.conf /home/user/.config/fontconfig/fonts.conf
 
 USER user
 
