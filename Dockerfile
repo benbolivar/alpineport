@@ -14,7 +14,7 @@ ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
 ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
-ENV SWT_GTK3=0
+#ENV SWT_GTK3=0
 ENV SWT_WEBKIT2=0
 
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
