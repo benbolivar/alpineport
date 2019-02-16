@@ -1,6 +1,6 @@
 # buggy with gtk+ issues when opening Eclipse dialog windows
 #FROM openjdk:8u191-jre-alpine3.8
-FROM anapsix/alpine-java
+FROM anapsix/alpine-java:8u192b12_server-jre
 #FROM alpine:3.8
 
 EXPOSE 8080 8000 5900 6080 32745
@@ -15,7 +15,7 @@ ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
 ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
-#ENV SWT_GTK3=0
+ENV SWT_GTK3=1
 ENV SWT_WEBKIT2=1
 ENV LANG=C.UTF-8
 
