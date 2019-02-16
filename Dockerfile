@@ -20,9 +20,9 @@ ENV SWT_WEBKIT2=1
 ENV LANG=C.UTF-8
 
 #ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
-ARG ECLIPSE_MIRROR=http://ftp.fau.de//eclipse/technology/epp/downloads/release/2018-09/R
+ARG ECLIPSE_MIRROR=http://ftp.fau.de//eclipse/technology/epp/downloads/release/2019-03/M1
 #ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
-ARG ECLIPSE_TAR=eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz
+ARG ECLIPSE_TAR=eclipse-cpp-2019-03-M1-linux-gtk-x86_64.tar.gz
       
 #    supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
 RUN apk del libstdc++ && \
