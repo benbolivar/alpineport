@@ -77,7 +77,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     rm /tmp/glibc-2.29-r0.apk && \
     rm /tmp/glibc-bin-2.29-r0.apk && \
     rm /tmp/glibc-i18n-2.29-r0.apk && \
-    rm /tmp/libz.tar.xz && \
     rm -rf /tmp/libz && \
     \
     ( /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 || true ) && \
@@ -108,6 +107,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
 #    tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
 #    cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
 #    \
+#    rm /tmp/libz.tar.xz && \
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
