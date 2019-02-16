@@ -1,7 +1,7 @@
 # buggy with gtk+ issues when opening Eclipse dialog windows
 #FROM openjdk:8u191-jre-alpine3.8
-#FROM anapsix/alpine-java
-FROM alpine:3.8
+FROM anapsix/alpine-java
+#FROM alpine:3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
@@ -17,22 +17,14 @@ ENV USER_NAME=user
 ENV HOME=/home/user
 #ENV SWT_GTK3=0
 ENV SWT_WEBKIT2=1
-ENV JAVA_VERSION_MAJOR=8 \
-    JAVA_VERSION_MINOR=201 \
-    JAVA_VERSION_BUILD=09 \
-    JAVA_PACKAGE=server-jre \
-    JAVA_PACKAGE_VARIANT=nashorn \
-    JAVA_JCE=standard \
-    JAVA_HOME=/opt/jdk \
-    PATH=${PATH}:/opt/jdk/bin \
-    LANG=C.UTF-8
+ENV LANG=C.UTF-8
 
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
 #    supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    apk upgrade apk-tools && apk add --update libstdc++ java-cacerts ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
+    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -65,40 +57,21 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
         \nexport TOMCAT_HOME=/home/user/tomcat8\
         \nexport PATH=$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
-        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
-    \
-    cd /tmp && \
-    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
-    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
-    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
-    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
-    \
-    rm /tmp/glibc-2.29-r0.apk && \
-    rm /tmp/glibc-bin-2.29-r0.apk && \
-    rm /tmp/glibc-i18n-2.29-r0.apk && \
-    rm -rf /tmp/libz && \
-    \
-    ( /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 || true ) && \
-    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
-    /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib && \
-    curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" -o /tmp/java.tar.gz \
-      http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/42970487e3af4f5aa5bca3f542482c60/${JAVA_PACKAGE}-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz && \
-    gunzip /tmp/java.tar.gz && \
-    tar -C /opt -xf /tmp/java.tar && \
-    ln -s /opt/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} /opt/jdk && \
-    find /opt/jdk/ -maxdepth 1 -mindepth 1 | grep -v jre | xargs rm -rf && \
-    cd /opt/jdk/ && ln -s ./jre/bin ./bin && \
-    sed -i s/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=10/ $JAVA_HOME/jre/lib/security/java.security && \
-    \
-    ln -sf /etc/ssl/certs/java/cacerts $JAVA_HOME/jre/lib/security/cacerts
-
-#    curl -Lso /tmp/libz.tar.xz https://www.archlinux.org/packages/core/x86_64/zlib/download && \
-#    mkdir -p /tmp/libz && \
-#    tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
-#    cp /tmp/libz/usr/lib/libz.so.* /usr/glibc-compat/lib && \
+        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc
+        
+#        && \
 #    \
-#    rm /tmp/libz.tar.xz && \
+#    cd /tmp && \
+#    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+#    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
+#    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
+#    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
+#    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
+#    \
+#    rm /tmp/glibc-2.29-r0.apk && \
+#    rm /tmp/glibc-bin-2.29-r0.apk && \
+#    rm /tmp/glibc-i18n-2.29-r0.apk && \
+#    rm -rf /tmp/libz && \
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
