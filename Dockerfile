@@ -56,7 +56,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     sudo sed "s/@user.home\/eclipse-workspace/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk add firefox-esr greybird-themes-gtk3 && \
+    apk add firefox-esr greybird-themes-gtk3 webkit2gtk && \
     \
     printf "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
