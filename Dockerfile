@@ -57,8 +57,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" > /etc/apk/reposi
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home\/eclipse-workspace/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add firefox-esr greybird-themes-gtk3 font-croscore && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories && \
+    apk add mesa-egl webkitgtk && \
     \
     printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
         \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
@@ -90,6 +91,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" > /etc/apk/reposi
 #    apk del curl glibc-i18n && \
 #    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
 #    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
+#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
