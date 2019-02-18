@@ -62,9 +62,10 @@ RUN apk del libstdc++ && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add firefox-esr greybird-themes-gtk3 font-croscore && \
     \
-    printf "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
+    printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
+        \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
-        \nexport PATH=$M2_HOME/bin:$PATH\
+        \nexport PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
         \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
     \
