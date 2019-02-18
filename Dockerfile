@@ -18,8 +18,8 @@ ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX
 ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
-ENV SWT_GTK3=1
-ENV SWT_WEBKIT2=1
+#ENV SWT_GTK3=1
+#ENV SWT_WEBKIT2=1
 #ENV LANG=C.UTF-8
 
 ARG ECLIPSE_MIRROR=http://ftp.fau.de//eclipse/technology/epp/downloads/release/2019-03/M1
@@ -27,7 +27,7 @@ ARG ECLIPSE_TAR=eclipse-cpp-2019-03-M1-linux-gtk-x86_64.tar.gz
 
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
 #    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" > /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc vim \
     supervisor x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
