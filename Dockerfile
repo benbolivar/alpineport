@@ -1,13 +1,16 @@
 # buggy with gtk+ issues when opening Eclipse dialog windows
 #FROM openjdk:8u191-jre-alpine3.8
-FROM anapsix/alpine-java:8u202b08_jdk
-#FROM alpine:3.8
+#FROM anapsix/alpine-java:8u202b08_jdk
+FROM alpine:3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
 ENV DOCKER_VERSION=1.6.0 \
     MAVEN_VERSION=3.3.9 \
-    TOMCAT_HOME=/home/user/tomcat8
+    TOMCAT_HOME=/home/user/tomcat8 \
+    JAVA_VERSION=8u131 \
+    JAVA_VERSION_PREFIX=1.8.0_131
+    
 ENV TERM xterm
 ENV DISP_SIZE 1600x900x16
 ENV DISPLAY :20.0
@@ -63,21 +66,22 @@ RUN apk del libstdc++ && \
         \nexport TOMCAT_HOME=/home/user/tomcat8\
         \nexport PATH=$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
-        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc
-        
-#        && \
-#    \
-#    cd /tmp && \
-#    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-#    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
-#    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
-#    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
-#    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
-#    \
-#    rm /tmp/glibc-2.29-r0.apk && \
-#    rm /tmp/glibc-bin-2.29-r0.apk && \
-#    rm /tmp/glibc-i18n-2.29-r0.apk && \
-#    rm -rf /tmp/libz && \
+        \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
+    \
+    cd /tmp && \
+    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
+    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
+    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
+    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
+    \
+    rm /tmp/glibc-2.29-r0.apk && \
+    rm /tmp/glibc-bin-2.29-r0.apk && \
+    rm /tmp/glibc-i18n-2.29-r0.apk && \
+    rm -rf /tmp/libz && \
+    \
+    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
+        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
