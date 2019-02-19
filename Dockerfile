@@ -59,6 +59,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
     \
     apk add firefox-esr font-croscore && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories && \
     apk add mesa-egl webkitgtk && \
     \
     printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
