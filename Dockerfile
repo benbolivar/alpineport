@@ -28,7 +28,7 @@ ARG ECLIPSE_TAR=eclipse-cpp-2019-03-M1-linux-gtk-x86_64.tar.gz
 
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
 #    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
@@ -61,7 +61,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
     apk add firefox-esr font-croscore && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories && \
-    apk add mesa-egl webkitgtk && \
+    apk add mesa-egl webkitgtk openjdk8 && \
     \
     printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
         \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
@@ -75,10 +75,14 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
     wget -O /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
     apk add --allow-untrusted /tmp/glibc-2.29-r0.apk && \
     \
-    rm /tmp/glibc-2.29-r0.apk && \
-    \
-    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
-        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
+    rm /tmp/glibc-2.29-r0.apk
+    
+#&& \
+#    \
+    
+    
+#    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
+#        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
 
 #    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 && \
 #    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
