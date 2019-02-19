@@ -8,8 +8,8 @@ EXPOSE 8080 8000 5900 6080 32745
 ENV DOCKER_VERSION=1.6.0 \
     MAVEN_VERSION=3.3.9 \
     TOMCAT_HOME=/home/user/tomcat8 \
-    JAVA_VERSION=8u202 \
-    JAVA_VERSION_PREFIX=1.8.0_202
+    JAVA_VERSION=8u131 \
+    JAVA_VERSION_PREFIX=1.8.0_131
     
 ENV TERM xterm
 ENV DISP_SIZE 1600x900x16
@@ -78,8 +78,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
     rm /tmp/glibc-2.29-r0.apk && \
     \
     wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
-        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-${JAVA_VERSION}-linux-x64.tar.gz \
-            | sudo tar -zx -C /opt/
+        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
 
 #    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 && \
 #    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
