@@ -21,7 +21,7 @@ ENV USER_NAME=user
 ENV HOME=/home/user
 ENV SWT_GTK3=1
 ENV SWT_WEBKIT2=1
-ENV LANG=C.UTF-8
+#ENV LANG=C.UTF-8
 
 ARG ECLIPSE_MIRROR=http://ftp.fau.de//eclipse/technology/epp/downloads/release/2019-03/M1
 ARG ECLIPSE_TAR=eclipse-cpp-2019-03-M1-linux-gtk-x86_64.tar.gz
