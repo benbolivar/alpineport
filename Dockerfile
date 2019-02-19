@@ -57,7 +57,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home\/eclipse-workspace/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
-    apk add firefox-esr greybird-themes-gtk3 font-croscore && \
+    apk add firefox-esr gtk3 font-croscore && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories && \
     apk add mesa-egl webkitgtk && \
     \
