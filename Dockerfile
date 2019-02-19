@@ -1,7 +1,7 @@
+# buggy with gtk+ issues when opening Eclipse dialog windows
 #FROM openjdk:8u191-jre-alpine3.8
 #FROM anapsix/alpine-java:8u202b08_jdk
-#FROM alpine:3.8
-FROM alpine:edge
+FROM alpine:3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
@@ -15,23 +15,22 @@ ENV TERM xterm
 ENV DISP_SIZE 1600x900x16
 ENV DISPLAY :20.0
 ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
-#ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX
-#ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
 ENV SWT_GTK3=1
 ENV SWT_WEBKIT2=1
-#ENV LANG=C.UTF-8
+ENV LANG=C.UTF-8
 
+#ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_MIRROR=http://ftp.fau.de//eclipse/technology/epp/downloads/release/2019-03/M1
+#ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
 ARG ECLIPSE_TAR=eclipse-cpp-2019-03-M1-linux-gtk-x86_64.tar.gz
-
-#RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-#    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
+      
+#    supervisor chromium icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst font-croscore && \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
-    supervisor x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
+    supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
@@ -55,14 +54,12 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
          -subj "/C=PH/ST=Cebu/L=Cebu/O=NA/OU=NA/CN=codenvy.io" && \
     sudo chmod 444 /etc/pki/tls/certs/novnc.pem && \
     \
-    sudo apk add --update adwaita-gtk2-theme gdk-pixbuf libxext-dev libxrender-dev libxtst-dev gtk+3.0 gtk+3.0-dev g++ gdb make && \
+    sudo apk add --update adwaita-gtk2-theme gdk-pixbuf libxext-dev libxrender-dev libxtst-dev gtk+3.0 g++ gdb make && \
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home\/eclipse-workspace/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
-    apk add firefox-esr font-croscore && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories && \
-    apk add mesa-egl webkitgtk openjdk8 && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk add firefox-esr greybird-themes-gtk3 font-croscore && \
     \
     printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
         \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
@@ -72,34 +69,19 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
         \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
     \
     cd /tmp && \
-    wget -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-    wget -O /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
-    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk && \
+    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
+    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
+    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
+    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
     \
-    rm /tmp/glibc-2.29-r0.apk
-    
-#&& \
-#    \
-    
-    
-#    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
-#        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
-
-#    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 && \
-#    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
-#    /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib && \
-#    \
-#    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
-#    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
-#    apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
-#    rm /tmp/glibc-bin-2.29-r0.apk && \
-#    rm /tmp/glibc-i18n-2.29-r0.apk && \
-#    rm -rf /tmp/libz && \
-#    apk del curl glibc-i18n && \
-#    curl -so /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-#    curl -Lso /tmp/glibc-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk && \
-#    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-
+    rm /tmp/glibc-2.29-r0.apk && \
+    rm /tmp/glibc-bin-2.29-r0.apk && \
+    rm /tmp/glibc-i18n-2.29-r0.apk && \
+    rm -rf /tmp/libz && \
+    \
+    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
+        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
