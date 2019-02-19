@@ -78,7 +78,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
     rm /tmp/glibc-2.29-r0.apk && \
     \
     wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
-        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-${JAVA_VERSION}-linux-x64.tar.gz
+        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-${JAVA_VERSION}-linux-x64.tar.gz \
+            | sudo tar -zx -C /opt/
 
 #    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 && \
 #    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
