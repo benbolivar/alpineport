@@ -12,8 +12,9 @@ ENV TERM xterm
 ENV DISP_SIZE 1600x900x16
 ENV DISPLAY :20.0
 ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
-ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX
-ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
+#ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX
+#ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
+ENV PATH=$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
 
@@ -68,9 +69,11 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     \
     rm /tmp/glibc-2.29-r0.apk && \
     rm /tmp/glibc-bin-2.29-r0.apk && \
-    \
-    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
-        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
+    apk add --no-cache openjdk8
+    
+#    \
+#    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
+#        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
