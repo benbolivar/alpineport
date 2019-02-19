@@ -28,7 +28,7 @@ ARG ECLIPSE_TAR=eclipse-cpp-2019-03-M1-linux-gtk-x86_64.tar.gz
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
 #    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repositories && \
-    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc vim \
+    apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -53,7 +53,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/main/community" >> /etc/apk/repos
          -subj "/C=PH/ST=Cebu/L=Cebu/O=NA/OU=NA/CN=codenvy.io" && \
     sudo chmod 444 /etc/pki/tls/certs/novnc.pem && \
     \
-    sudo apk add --update adwaita-gtk2-theme gdk-pixbuf libxext-dev libxrender-dev libxtst-dev gtk+3.0 g++ gdb make && \
+    sudo apk add --update adwaita-gtk2-theme gdk-pixbuf libxext-dev libxrender-dev libxtst-dev gtk+3.0 gtk+3.0-dev g++ gdb make && \
     sudo wget ${ECLIPSE_MIRROR}/${ECLIPSE_TAR} -O /tmp/eclipse.tar.gz -q && sudo tar -xf /tmp/eclipse.tar.gz -C /opt && sudo rm /tmp/eclipse.tar.gz && \
     sudo sed "s/@user.home\/eclipse-workspace/\/projects/g" -i /opt/eclipse/eclipse.ini && \
     \
