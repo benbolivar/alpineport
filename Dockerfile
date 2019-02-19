@@ -15,12 +15,13 @@ ENV TERM xterm
 ENV DISP_SIZE 1600x900x16
 ENV DISPLAY :20.0
 ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
-ENV PATH=$M2_HOME/bin:$PATH
+ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX
+ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 ENV USER_NAME=user
 ENV HOME=/home/user
 ENV SWT_GTK3=1
 ENV SWT_WEBKIT2=1
-ENV LANG=C.UTF-8
+#ENV LANG=C.UTF-8
 
 #ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_MIRROR=http://ftp.fau.de//eclipse/technology/epp/downloads/release/2019-03/M1
@@ -79,9 +80,15 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     rm /tmp/glibc-bin-2.29-r0.apk && \
     rm /tmp/glibc-i18n-2.29-r0.apk && \
     rm -rf /tmp/libz && \
+    apk del curl glibc-i18n && \
     \
     wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
         http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
+
+#    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 && \
+#    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
+#    /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib && \
+#    \
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
