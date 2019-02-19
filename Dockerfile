@@ -1,5 +1,4 @@
-#FROM alpine:3.8
-FROM alpine
+FROM alpine:3.8
 
 EXPOSE 8080 8000 5900 6080 32745
 
