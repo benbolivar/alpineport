@@ -1,6 +1,7 @@
 #FROM openjdk:8u191-jre-alpine3.8
 #FROM anapsix/alpine-java:8u202b08_jdk
-FROM alpine:3.8
+#FROM alpine:3.8
+FROM alpine:edge
 
 EXPOSE 8080 8000 5900 6080 32745
 
