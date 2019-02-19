@@ -54,10 +54,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --no-cache firefox-esr font-croscore adwaita-icon-theme adwaita-gtk2-theme && \
     \
-    printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
-        \nexport M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
+    printf "export M2_HOME=/home/user/apache-maven-$MAVEN_VERSION\
         \nexport TOMCAT_HOME=/home/user/tomcat8\
-        \nexport PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\
+        \nexport PATH=$M2_HOME/bin:$PATH\
         \nif [ ! -f /projects/KeepAlive/keepalive.html ]\nthen\
         \nsleep 5\ncp -rf /home/user/KeepAlive /projects\nfi" | sudo tee -a /home/user/.bashrc && \
     \
@@ -71,6 +70,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     rm /tmp/glibc-bin-2.29-r0.apk && \
     apk add --no-cache openjdk8
     
+#    printf "export JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX\
+#        \nexport PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH\
 #    \
 #    wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
 #        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
