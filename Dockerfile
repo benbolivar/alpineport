@@ -67,17 +67,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk && \
     \
     rm /tmp/glibc-2.29-r0.apk && \
+    rm /tmp/glibc-bin-2.29-r0.apk && \
     \
     wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
         http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
-
-#    !!!rm /tmp/glibc-bin-2.29-r0.apk && \
-#    !!!rm /tmp/glibc-i18n-2.29-r0.apk && \
-#    rm -rf /tmp/libz && \
-#    apk del curl glibc-i18n && \
-#    !!!apk add --allow-untrusted /tmp/glibc-2.29-r0.apk /tmp/glibc-bin-2.29-r0.apk /tmp/glibc-i18n-2.29-r0.apk && \
-#    curl -Lso /tmp/glibc-bin-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk && \
-#    curl -Lso /tmp/glibc-i18n-2.29-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk && \
 
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
