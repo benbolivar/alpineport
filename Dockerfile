@@ -7,8 +7,6 @@ ENV DOCKER_VERSION=1.6.0 \
     TOMCAT_HOME=/home/user/tomcat8 \
     JAVA_VERSION=8u202 \
     JAVA_VERSION_PREFIX=1.8.0_202
-#    JAVA_VERSION_PREFIX=1.8.0_131
-#    JAVA_VERSION=8u131 \
     
 ENV TERM xterm
 ENV DISP_SIZE 1600x900x16
@@ -73,7 +71,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     \
     wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -qO- \
         http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b08/1961070e4c9b4e26a04e7f5a083f551e/server-jre-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
-    
+
+# use for JDK version    
 #        http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${JAVA_VERSION}-linux-x64.tar.gz | sudo tar -zx -C /opt/
 
 ADD index.html  /opt/noVNC/
