@@ -28,8 +28,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
-    addgroup -S users && adduser -S user -h /home/user -s /bin/bash -G users -u 1000 && \
-    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    addgroup -S users,sudo && adduser -S user -h /home/user -s /bin/bash -G users,sudo -u 1000 && \
+    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -p "*" user && \
     \
     sudo mkdir -p /opt/noVNC/utils/websockify && \
