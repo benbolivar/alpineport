@@ -22,13 +22,14 @@ ENV HOME=/home/user
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
+#    addgroup sudo && adduser -S user -h /home/user -s /bin/bash -G users,sudo -u 1000 && \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
-    addgroup -S sudo && adduser -S user -h /home/user -s /bin/bash -G users,sudo -u 1000 && \
+    addgroup sudo && adduser user -b /home/user -s /bin/bash -G users,sudo -u 1000 && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -p "*" user && \
     \
