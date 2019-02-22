@@ -18,7 +18,7 @@
 [encoding] {UTF-8}
       [exec] (Terminal) {xterm -fa "xft:DejaVu Sans Mono:pixelsize=14"}
       [exec] (File Manager) {xterm -e mc}
-      [exec] (Firefox) {firefox}
+      [exec] (Firefox) {sudo firefox}
       [exec] (Eclipse CDT) {/opt/eclipse/eclipse}
 [submenu] (Editors)
       [exec]   (vim) {xterm -fa "xft:DejaVu Sans Mono:pixelsize=14" -e vim}
