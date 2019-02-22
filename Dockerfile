@@ -28,7 +28,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
-    adduser -S user -h /home/user -s /bin/bash -G root -u 1000 && \
+    addgroup -S user && adduser -S user -h /home/user -s /bin/bash -G user -u 1000 && \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -p "*" user && \
     \
@@ -80,9 +80,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
-ADD --chown=user:root menu /home/user/.menu
-ADD --chown=user:root init /home/user/.init
-ADD --chown=user:root fonts.conf /home/user/.config/fontconfig/fonts.conf
+ADD --chown=user:user menu /home/user/.menu
+ADD --chown=user:user init /home/user/.init
+ADD --chown=user:user fonts.conf /home/user/.config/fontconfig/fonts.conf
 
 USER user
 
