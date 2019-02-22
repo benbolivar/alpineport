@@ -24,14 +24,17 @@ ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
 #    addgroup sudo && adduser -S user -h /home/user -s /bin/bash -G users,sudo -u 1000 && \
 #    usermod -p "*" user && \
+#    addgroup sudo && adduser --home /home/user -s /bin/bash -g users -G sudo -u 1000 user && \
+#    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
-    addgroup sudo && adduser user --home /home/user -s /bin/bash -g users -G sudo -u 1000 && \
-    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    addgroup sudo && adduser --home /home/user -s /bin/bash -g users -G sudo -G root -u 1000 user && \
+    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    usermod -p "*" user && \
     \
     sudo mkdir -p /opt/noVNC/utils/websockify && \
     wget -qO- "http://github.com/kanaka/noVNC/tarball/master" | sudo tar -zx --strip-components=1 -C /opt/noVNC && \
