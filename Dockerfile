@@ -29,7 +29,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
-    addgroup sudo && adduser user -d /home/user -s /bin/bash -g users -G sudo -u 1000 && \
+    addgroup sudo && adduser user -h /home/user -s /bin/bash -g users -G sudo -u 1000 && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -p "*" user && \
     \
