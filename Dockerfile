@@ -26,6 +26,14 @@ ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
 #    usermod -p "*" user && \
 #    addgroup sudo && adduser --home /home/user -s /bin/bash -g users -G sudo -u 1000 user && \
 #    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+
+#    \
+#    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+#    rm -rf /tmp/* /var/cache/apk/* && \
+#    addgroup -S users && adduser -S user -h /home/user -s /bin/bash -G users -u 1000 && \
+#    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+#    usermod -p "*" user && \
+#    \
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
