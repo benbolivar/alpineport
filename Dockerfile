@@ -41,7 +41,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
     rm -rf /tmp/* /var/cache/apk/* && \
-    addgroup sudo && adduser -S user -h /home/user -s /bin/bash -G sudo -G users -u 1000 && \
+    groupadd sudo && useradd -u 1000 -G users,sudo -d /home/user --shell /bin/bash -m user && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -p "*" user && \
     \
