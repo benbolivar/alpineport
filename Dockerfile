@@ -94,7 +94,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
 ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
-ADD --chown=user:user menu /home/user/.menu
+ADD --chown=user:users menu /home/user/.menu
 ADD --chown=user:users init /home/user/.init
 ADD --chown=user:users fonts.conf /home/user/.config/fontconfig/fonts.conf
 
