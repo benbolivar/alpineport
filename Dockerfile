@@ -40,9 +40,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
     \
-    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/* && \
-    adduser -S user -h /home/user -s /bin/bash -G users,root -u 1000 && \
+    addgroup sudo && adduser -S user -h /home/user -s /bin/bash -G users,sudo -u 1000 && \
+    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -p "*" user && \
     \
     sudo mkdir -p /opt/noVNC/utils/websockify && \
