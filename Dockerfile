@@ -89,6 +89,6 @@ WORKDIR /projects
 
 ENV ECLIPSE_WORKSPACE=/projects
 ENV ECLIPSE_DOT=/projects/.eclipse
-ENV DELAY=35
+ENV DELAY=40
 
 CMD /usr/bin/supervisord -c /opt/supervisord.conf & sleep 365d
