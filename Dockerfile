@@ -22,20 +22,6 @@ ENV HOME=/home/user
 ARG ECLIPSE_MIRROR=http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R
 ARG ECLIPSE_TAR=eclipse-cpp-photon-R-linux-gtk-x86_64.tar.gz
       
-#    addgroup sudo && adduser -S user -h /home/user -s /bin/bash -G users,sudo -u 1000 && \
-#    usermod -p "*" user && \
-#    addgroup sudo && adduser --home /home/user -s /bin/bash -g users -G sudo -u 1000 user && \
-#    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-
-
-#    \
-#    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-#    rm -rf /tmp/* /var/cache/apk/* && \
-#    addgroup sudo && adduser --home /home/user -s /bin/bash -g users -G sudo -G root -u 1000 user && \
-#    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-#    usermod -p "*" user && \
-#    \
-
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk upgrade apk-tools && apk add --update ca-certificates bash openssh openssl shadow sudo wget unzip mc curl vim \
     supervisor icu-libs x11vnc xvfb subversion fluxbox xterm dbus-x11 libxext libxrender libxtst && \
@@ -103,6 +89,6 @@ WORKDIR /projects
 
 ENV ECLIPSE_WORKSPACE=/projects
 ENV ECLIPSE_DOT=/projects/.eclipse
-ENV DELAY=50
+ENV DELAY=35
 
 CMD /usr/bin/supervisord -c /opt/supervisord.conf & sleep 365d
