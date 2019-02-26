@@ -95,8 +95,8 @@ ADD index.html  /opt/noVNC/
 ADD supervisord.conf /opt/
 ADD keepalive.html /home/user/KeepAlive
 ADD --chown=user:user menu /home/user/.menu
-ADD --chown=user:user init /home/user/.init
-ADD --chown=user:user fonts.conf /home/user/.config/fontconfig/fonts.conf
+ADD --chown=user:users init /home/user/.init
+ADD --chown=user:users fonts.conf /home/user/.config/fontconfig/fonts.conf
 
 USER user
 
